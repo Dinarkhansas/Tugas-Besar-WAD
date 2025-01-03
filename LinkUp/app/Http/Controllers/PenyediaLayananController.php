@@ -13,7 +13,9 @@ class PenyediaLayananController extends Controller
      */
     public function index()
     {
+        $penyediaLayanans = penyediaLayanan::all();
         
+        return view('penyediaLayanan.index', compact('penyediaLayanan'));
     }
 
     /**
@@ -21,7 +23,7 @@ class PenyediaLayananController extends Controller
      */
     public function create()
     {
-        //
+        return view('penyediaLayanan.create');
     }
 
     /**
@@ -29,23 +31,40 @@ class PenyediaLayananController extends Controller
      */
     public function store(StorepenyediaLayananRequest $request)
     {
-        //
+        $validatedDate = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+            'id' => 'required|string',
+            'nama' => 'required|string',
+            'jenis_kelamin' => 'required|string',
+            'umur' => 'required|integer',
+            'alamat' => 'required|string',
+            'kontak' => 'required|integer',
+            'deskripsi' => 'required|string',
+            'jenis_layanan' => 'required|string',
+            
+
+        ]);
+        penyediaLayanan::create($validatedDate);
+        return redirect()->route('penyediaLayanan.index')->with('success','Data penyedia layanan berhasil disimpan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(penyediaLayanan $penyediaLayanan)
+    public function show($id)
     {
-        //
+        $penyediaLayanans = penyediaLayanan::find($id); 
+        return view('penyediaLayanan.show',compact('penyediaLayanan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(penyediaLayanan $penyediaLayanan)
+    public function edit($id)
     {
-        //
+        $penyediaLayanans = penyediaLayanan::findOrFail($id);
+        return view('penyediaLayanan.edit', compact('penyediaLayanan'));
     }
 
     /**
@@ -53,7 +72,22 @@ class PenyediaLayananController extends Controller
      */
     public function update(UpdatepenyediaLayananRequest $request, penyediaLayanan $penyediaLayanan)
     {
-        //
+        $validatedDate = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+            'id' => 'required|string',
+            'nama' => 'required|string',
+            'jenis_kelamin' => 'required|string',
+            'umur' => 'required|integer',
+            'alamat' => 'required|string',
+            'kontak' => 'required|integer',
+            'deskripsi' => 'required|string',
+            'jenis_layanan' => 'required|string',
+            
+
+        ]);
+        $penyediaLayanans->update($validatedDate);
+        return redirect()->route('penyediaLayanan.index')->with('success','Data penyedia layanan berhasil disimpan');
     }
 
     /**
@@ -61,6 +95,7 @@ class PenyediaLayananController extends Controller
      */
     public function destroy(penyediaLayanan $penyediaLayanan)
     {
-        //
+        $penyediaLayanans->delete();
+        return redirect()->route('penyediaLayanan.index')->with('succes', "Data penyedia Layanan Berhasil Dihapus");
     }
 }
