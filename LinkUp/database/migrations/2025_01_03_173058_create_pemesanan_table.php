@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('harga');
             $table->timestamps();
 
-            // $table->foreign('id_penyedia_layanan')->references('id')->on('penyedia_layanan');
+            $table->foreign('id_penyedia_layanan')->references('id')->on('penyedia_layanan');
         });
     }
 
