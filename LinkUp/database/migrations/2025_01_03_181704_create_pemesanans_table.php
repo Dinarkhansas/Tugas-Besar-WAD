@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_layananan');
-            $table->string('harga');
+            
             $table->timestamps();
-            $table->foreign('id_penyedia_layanan')->references('id')->on('penyedia_layanan');
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemesanan');
+        Schema::dropIfExists('pemesanans');
     }
 };
