@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
+            $table->id();
+            $table->string('username');
+            $table->string('password');
+            $table->string('nama');
+            $table->string('alamat');
+            $table->integer('umur');
+            $table->integer('kontak');
+            $table->timestamps();
             $table->timestamps();
         });
     }

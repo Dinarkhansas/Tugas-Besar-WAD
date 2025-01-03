@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemesanan', function (Blueprint $table) {
+        Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
-            
+            $table->id();
+            $table->string('jenis_layananan');
+            $table->string('harga');
+            $table->timestamps();
+            $table->foreign('id_penyedia_layanan')->references('id')->on('penyedia_layanan');
             $table->timestamps();
         });
     }
