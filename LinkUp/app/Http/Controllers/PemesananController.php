@@ -14,6 +14,9 @@ class PemesananController extends Controller
     public function index()
     {
         //
+        $pelanggan = Pelanggan::all();
+        
+        return view('pelanggan.index', compact('pelanggan'));
     }
 
     /**
