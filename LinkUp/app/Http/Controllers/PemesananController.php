@@ -15,7 +15,7 @@ class PemesananController extends Controller
     public function index()
     {
         //
-        $pelanggan = Pemesanan::all();
+        $pemesanans = Pemesanan::all();
         
         return view('pemesanan.index', compact('pemesanan'));
     }
@@ -53,7 +53,7 @@ class PemesananController extends Controller
     public function show($id)
     {
         //
-        $pemesanan = Pemesanan::find($id); 
+        $pemesanans = Pemesanan::find($id); 
         return view('pemesanan.show', compact('pemesanan')); 
     }
 
@@ -63,7 +63,7 @@ class PemesananController extends Controller
     public function edit($id)
     {
         //
-        $pemesanan = Pemesanan::findOrFail($id);
+        $pemesanas = Pemesanan::findOrFail($id);
         $penyediaLayanan = penyediaLayanan::all();
         return view('pemesanan.edit', compact('pemesanan', 'penyedia_layanan'));
     }
@@ -71,7 +71,7 @@ class PemesananController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepemesananRequest $request, Pemesanan $pemesanan)
+    public function update(UpdatepemesananRequest $request, Pemesanan $pemesanans)
     {
         //
         $validatedDate = $request->validate([
@@ -81,7 +81,7 @@ class PemesananController extends Controller
             'id_penyedia_layanan' => 'required|integer|exists:penyedia_layanan,id',
 
         ]);
-        $pemesanan->update($validatedDate);
+        $pemesanans->update($validatedDate);
         return redirect()->route('pemesanan.index')->with('succes', 'Data Pemesanan Berhasil Diperbaharui');
 
 
@@ -90,10 +90,10 @@ class PemesananController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pemesanan $pemesanan)
+    public function destroy(Pemesanan $pemesanans)
     {
         //
-        $pemesanan->delete();
+        $pemesanans->delete();
 
         return redirect()->route('pemesanan.index')->with('succes', "Data Pemesanan Berhasil Dihapus");
     }
