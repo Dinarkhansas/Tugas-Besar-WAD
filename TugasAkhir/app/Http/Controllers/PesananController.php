@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Layanan;
 use App\Models\Pesanan;
 use App\Http\Requests\StorePesananRequest;
 use App\Http\Requests\UpdatePesananRequest;
@@ -14,6 +15,9 @@ class PesananController extends Controller
     public function index()
     {
         //
+        $mahasiswa = Pesanan::all();
+        
+        return view('pesanan.index', compact('pesanan'));
     }
 
     /**
@@ -22,6 +26,8 @@ class PesananController extends Controller
     public function create()
     {
         //
+        $layanan = Layanan::all();
+        return view('pesanan.create', compact('layanan'));
     }
 
     /**
@@ -30,14 +36,26 @@ class PesananController extends Controller
     public function store(StorePesananRequest $request)
     {
         //
+        $validatedDate = $request->validate([
+            'kode_pesanan' => 'required|string',
+            'harga' => 'required|string',
+            'nama_layanan' => 'required|string',
+            'layanan_id' => 'required|string',
+
+
+        ]);
+        Pesanan::create($validatedDate);
+        return redirect()->route('pesanan.index')->with('success', 'Data Pesanan Berhasil Disimpan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Pesanan $pesanan)
+    public function show($id)
     {
         //
+        $mahasiswa = Mahasiswa::find($id); 
+        return view('mahasiswa.show', compact('mahasiswa')); 
     }
 
     /**

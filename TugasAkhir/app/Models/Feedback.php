@@ -11,10 +11,10 @@ class Feedback extends Model
     use HasFactory;
     protected $table = 'pembayaran';
     protected $fillable =[
-        'kode_pembayaran',
         'nama_layanan',
         'jenis_pembayaran',
-        'pesanan_id'
+        'deskripsi',
+        'pembayaran_id'
 
     ];
 }

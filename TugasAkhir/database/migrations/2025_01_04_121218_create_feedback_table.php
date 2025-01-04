@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nama_layanan');
             $table->string('jenis_pembayaran');
+            $table->string('deskripsi');
             $table->bigInteger('pembayaran_id')->unsigned();
             $table->foreign('pembayaran_id')->references('id')->on('pembayaran');
         });

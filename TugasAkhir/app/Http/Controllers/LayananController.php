@@ -14,6 +14,9 @@ class LayananController extends Controller
     public function index()
     {
         //
+        $layanan= Layanan::all();
+        
+        return view('layanan.index', compact('layanan'));
     }
 
     /**
@@ -22,6 +25,7 @@ class LayananController extends Controller
     public function create()
     {
         //
+        return view('layanan.create');
     }
 
     /**
@@ -30,22 +34,37 @@ class LayananController extends Controller
     public function store(StoreLayananRequest $request)
     {
         //
+        $validatedDate = $request->validate([
+            'kode_layanan' => 'required|string',
+            'nama_pelayan' => 'required|string',
+            'kontak' => 'required|string',
+            'nama_layanan' => 'required|string',
+            'deskripsi' => 'required|string',
+            
+
+        ]);
+        Layanan::create($validatedDate);
+        return redirect()->route('layanan.index')->with('success', 'Data Layanan yang Tersedia Berhasil Disimpan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Layanan $layanan)
+    public function show($id)
     {
         //
+        $layanan = Layanan::find($id);  // Mengambil data dosen dari database
+        return view('layanan.show', compact('layanan'));  // Mengirimkan data dosen ke view
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Layanan $layanan)
+    public function edit($id)
     {
         //
+        $layanan = Layanan::findOrFail($id);
+        return view('layanan.edit', compact('layanan'));
     }
 
     /**
@@ -54,6 +73,16 @@ class LayananController extends Controller
     public function update(UpdateLayananRequest $request, Layanan $layanan)
     {
         //
+        $validatedDate = $request->validate([
+            'kode_layanan' => 'required|string',
+            'nama_pelayan' => 'required|string',
+            'kontak' => 'required|string',
+            'nama_layanan' => 'required|string',
+            'deskripsi' => 'required|string',
+
+        ]);
+        $layanan->update($validatedDate);
+        return redirect()->route('layanan.index')->with('succes', 'Tabel Layanan yang Tersedia Berhasil Diperbaharui');
     }
 
     /**
@@ -62,5 +91,8 @@ class LayananController extends Controller
     public function destroy(Layanan $layanan)
     {
         //
+        $layanan->delete();
+
+        return redirect()->route('dosen.index')->with('succes', "Data Layanan yang Tersedia Berhasil Dihapus");
     }
 }
