@@ -13,7 +13,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $admins = admin::all();
+        
+        return view('admin.index', compact('admin'));
     }
 
     /**
@@ -21,7 +23,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -29,7 +31,13 @@ class AdminController extends Controller
      */
     public function store(StoreadminRequest $request)
     {
-        //
+        $validatedDate = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+
+        ]);
+        admin::create($validatedDate);
+        return redirect()->route('admin.index')->with('success','Data admin berhasil disimpan');
     }
 
     /**
@@ -43,24 +51,32 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(admin $admin)
+    public function edit($id)
     {
-        //
+        $admins = penyediaLayanan::findOrFail($id);
+        return view('admin.edit', compact('admin'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateadminRequest $request, admin $admin)
+    public function update(UpdateadminRequest $request, admin $admins)
     {
-        //
+        $validatedDate = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+
+        ]);
+        $admins->update($validatedDate);
+        return redirect()->route('admin.index')->with('success','Data admin berhasil disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(admin $admin)
+    public function destroy(admin $admins)
     {
-        //
+        $admins->delete();
+        return redirect()->route('admin.index')->with('succes', "Data Admin Berhasil Dihapus");
     }
 }
