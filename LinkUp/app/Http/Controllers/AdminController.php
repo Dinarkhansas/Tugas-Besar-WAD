@@ -53,7 +53,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $admins = penyediaLayanan::findOrFail($id);
+        $admins = admin::findOrFail($id);
         return view('admin.edit', compact('admin'));
     }
 
