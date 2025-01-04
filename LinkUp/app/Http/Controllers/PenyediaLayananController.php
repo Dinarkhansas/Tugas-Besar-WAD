@@ -13,9 +13,9 @@ class PenyediaLayananController extends Controller
      */
     public function index()
     {
-        $penyediaLayanans = penyediaLayanan::all();
+        $penyediaLayanan = penyediaLayanan::all();
         
-        return view('penyediaLayanan.index', compact('penyediaLayanans'));
+        return view('penyediaLayanan.index', compact('penyediaLayanan'));
     }
 
     /**
@@ -39,7 +39,7 @@ class PenyediaLayananController extends Controller
             'jenis_kelamin' => 'required|string',
             'umur' => 'required|integer',
             'alamat' => 'required|string',
-            'kontak' => 'required|integer',
+            'kontak' => 'required|string',
             'deskripsi' => 'required|string',
             'jenis_layanan' => 'required|string',
         ]);
@@ -53,7 +53,7 @@ class PenyediaLayananController extends Controller
      */
     public function show($id)
     {
-        $penyediaLayanans = penyediaLayanan::find($id); 
+        $penyediaLayanan = penyediaLayanan::find($id); 
         return view('penyediaLayanan.show',compact('penyediaLayanan'));
     }
 
@@ -62,18 +62,16 @@ class PenyediaLayananController extends Controller
      */
     public function edit($id)
     {
-        $penyediaLayanans = penyediaLayanan::findOrFail($id);
+        $penyediaLayanan = penyediaLayanan::findOrFail($id);
         return view('penyediaLayanans.edit', compact('penyediaLayanan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepenyediaLayananRequest $request, penyediaLayanan $penyediaLayanans)
+    public function update(UpdatepenyediaLayananRequest $request, penyediaLayanan $penyediaLayanan)
     {
         $validatedData = $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
             'id' => 'required|string',
             'nama' => 'required|string',
             'jenis_kelamin' => 'required|string',
@@ -83,16 +81,16 @@ class PenyediaLayananController extends Controller
             'deskripsi' => 'required|string',
             'jenis_layanan' => 'required|string',
         ]);
-        $penyediaLayanans->update($validatedData);
+        $penyediaLayanan->update($validatedData);
         return redirect()->route('penyediaLayanan.index')->with('success', 'Data penyedia layanan berhasil diperbaharui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(penyediaLayanan $penyediaLayanans)
+    public function destroy(penyediaLayanan $penyediaLayanan)
     {
-        $penyediaLayanans->delete();
+        $penyediaLayanan->delete();
         return redirect()->route('penyediaLayanan.index')->with('succes', "Data penyedia Layanan Berhasil Dihapus");
     }
 }

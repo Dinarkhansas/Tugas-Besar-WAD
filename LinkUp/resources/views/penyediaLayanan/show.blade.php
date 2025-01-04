@@ -7,8 +7,8 @@
             <div class="">
             </div> Daftar Penyedia Layanan
         </a>
-        <a href="{{ route('penyediaLayanan.edit', $dosen->id) }}" class="btn btn-primary">Edit</a>
-        <form action="{{ route('penyediaLayanan.destroy', $dosen->id) }}" method="post" class="d-inline">
+        <a href="{{ route('penyediaLayanan.edit', $penyediaLayanan->id) }}" class="btn btn-primary">Edit</a>
+        <form action="{{ route('penyediaLayanan.destroy', $penyediaLayanan->id) }}" method="post" class="d-inline">
             @csrf
             @method('delete')
             <button type="submit" class="btn btn-outline-danger">Hapus</button>
@@ -19,42 +19,42 @@
         <div class="card-body">
             <div class="mb-3">
                 <label for="id" class="form-label">ID</label>
-                <input type="text" class="form-control" id="id" name="id" value="{{ $penyediaLayanans->id}}"
+                <input type="text" class="form-control" id="id" name="id" value="{{ $penyediaLayanan->id}}"
                     disabled>
             </div>
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="nama" name="nama" value="{{ $penyediaLayanans->nama}}"
+                <input type="text" class="form-control" id="nama" name="nama" value="{{ $penyediaLayanan->nama}}"
                     disabled>
             </div>
             <div class="mb-3">
                 <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                <input type="text" class="form-control" id="jenis_kelamin" name="jenis_kelamin" value="{{ $penyediaLayanans->jenis_kelamin}}"
+                <input type="text" class="form-control" id="jenis_kelamin" name="jenis_kelamin" value="{{ $penyediaLayanan->jenis_kelamin}}"
                     disabled>
             </div>
             <div class="mb-3">
                 <label for="umur" class="form-label">Umur</label>
-                <input type="text" class="form-control" id="umur" name="umur" value="{{ $penyediaLayanans->umur}}"
+                <input type="text" class="form-control" id="umur" name="umur" value="{{ $penyediaLayanan->umur}}"
                     disabled>
             </div>
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
-                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $penyediaLayanans->alamat}}"
+                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $penyediaLayanan->alamat}}"
                     disabled>
             </div>
             <div class="mb-3">
                 <label for="kontak" class="form-label">Kontak</label>
-                <input type="text" class="form-control" id="kontak" name="kontak" value="{{ $penyediaLayanans->kontak}}"
+                <input type="text" class="form-control" id="kontak" name="kontak" value="{{ $penyediaLayanan->kontak}}"
                     disabled>
             </div>
             <div class="mb-3">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ $penyediaLayanans->deskripsi}}"
+                <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ $penyediaLayanan->deskripsi}}"
                     disabled>
             </div>
             <div class="mb-3">
                 <label for="jenis_layanan" class="form-label">Jenis Layanan</label>
-                <input type="text" class="form-control" id="jenis_layanan" name="jenis_layanan" value="{{ $penyediaLayanans->jenis_layanan}}"
+                <input type="text" class="form-control" id="jenis_layanan" name="jenis_layanan" value="{{ $penyediaLayanan->jenis_layanan}}"
                     disabled>
             </div>
         </div>

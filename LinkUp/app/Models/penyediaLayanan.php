@@ -13,8 +13,6 @@ class penyediaLayanan extends Model
     protected $table = 'penyedia_layanans';
 
     protected $fillable = [
-        'username',
-        'password',
         'id',
         'nama',
         'jenis_kelamin',

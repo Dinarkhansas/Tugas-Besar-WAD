@@ -34,7 +34,7 @@
                 </thead>
                 <tbody>
                     
-                    @foreach ($penyediaLayanans as $row)
+                    @foreach ($penyediaLayanan as $row)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $row->id}}</td>

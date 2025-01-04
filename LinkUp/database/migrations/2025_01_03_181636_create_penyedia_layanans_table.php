@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('penyedia_layanans', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('password');
             $table->string('nama');
             $table->string('jenis_kelamin');
             $table->integer('umur');
             $table->string('alamat');
-            $table->integer('kontak');
+            $table->string('kontak');
             $table->string('deskripsi');
             $table->string('jenis_layanan');
             $table->timestamps();

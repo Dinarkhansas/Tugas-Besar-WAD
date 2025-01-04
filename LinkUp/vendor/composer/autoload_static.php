@@ -336,8 +336,8 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -377,8 +377,8 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         ),
         'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/uri-interfaces',
-            1 => __DIR__ . '/..' . '/league/uri',
+            0 => __DIR__ . '/..' . '/league/uri',
+            1 => __DIR__ . '/..' . '/league/uri-interfaces',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -516,8 +516,28 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
     );
 
     public static $classMap = array (
+        'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\PelangganController' => __DIR__ . '/../..' . '/app/Http/Controllers/PelangganController.php',
+        'App\\Http\\Controllers\\PemesananController' => __DIR__ . '/../..' . '/app/Http/Controllers/PemesananController.php',
+        'App\\Http\\Controllers\\PenyediaLayananController' => __DIR__ . '/../..' . '/app/Http/Controllers/PenyediaLayananController.php',
+        'App\\Http\\Requests\\StoreadminRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreadminRequest.php',
+        'App\\Http\\Requests\\StorepelangganRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StorepelangganRequest.php',
+        'App\\Http\\Requests\\StorepemesananRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StorepemesananRequest.php',
+        'App\\Http\\Requests\\StorepenyediaLayananRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StorepenyediaLayananRequest.php',
+        'App\\Http\\Requests\\UpdateadminRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateadminRequest.php',
+        'App\\Http\\Requests\\UpdatepelangganRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdatepelangganRequest.php',
+        'App\\Http\\Requests\\UpdatepemesananRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdatepemesananRequest.php',
+        'App\\Http\\Requests\\UpdatepenyediaLayananRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdatepenyediaLayananRequest.php',
+        'App\\Models\\Pemesanan' => __DIR__ . '/../..' . '/app/Models/Pemesanan.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\admin' => __DIR__ . '/../..' . '/app/Models/admin.php',
+        'App\\Models\\pelanggan' => __DIR__ . '/../..' . '/app/Models/pelanggan.php',
+        'App\\Models\\penyediaLayanan' => __DIR__ . '/../..' . '/app/Models/penyediaLayanan.php',
+        'App\\Policies\\AdminPolicy' => __DIR__ . '/../..' . '/app/Policies/AdminPolicy.php',
+        'App\\Policies\\PelangganPolicy' => __DIR__ . '/../..' . '/app/Policies/PelangganPolicy.php',
+        'App\\Policies\\PemesananPolicy' => __DIR__ . '/../..' . '/app/Policies/PemesananPolicy.php',
+        'App\\Policies\\PenyediaLayananPolicy' => __DIR__ . '/../..' . '/app/Policies/PenyediaLayananPolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
@@ -636,8 +656,16 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Database\\Factories\\AdminFactory' => __DIR__ . '/../..' . '/database/factories/AdminFactory.php',
+        'Database\\Factories\\PelangganFactory' => __DIR__ . '/../..' . '/database/factories/PelangganFactory.php',
+        'Database\\Factories\\PemesananFactory' => __DIR__ . '/../..' . '/database/factories/PemesananFactory.php',
+        'Database\\Factories\\PenyediaLayananFactory' => __DIR__ . '/../..' . '/database/factories/PenyediaLayananFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
+        'Database\\Seeders\\AdminSeeder' => __DIR__ . '/../..' . '/database/seeders/AdminSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\PelangganSeeder' => __DIR__ . '/../..' . '/database/seeders/PelangganSeeder.php',
+        'Database\\Seeders\\PemesananSeeder' => __DIR__ . '/../..' . '/database/seeders/PemesananSeeder.php',
+        'Database\\Seeders\\PenyediaLayananSeeder' => __DIR__ . '/../..' . '/database/seeders/PenyediaLayananSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
