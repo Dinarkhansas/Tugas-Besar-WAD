@@ -14,6 +14,9 @@ class PelangganController extends Controller
     public function index()
     {
         //
+        $pelanggab = pelanggan::all();
+        
+        return view('pelanggan.index', compact('pelanggan'));
     }
 
     /**
@@ -22,6 +25,7 @@ class PelangganController extends Controller
     public function create()
     {
         //
+        return view('pelanggan.create');
     }
 
     /**
@@ -30,37 +34,67 @@ class PelangganController extends Controller
     public function store(StorepelangganRequest $request)
     {
         //
+        $validatedDate = $request->validate([
+            'id' => 'required|string',
+            'username' => 'required|string',
+            'password' => 'required|string',
+            'nama' => 'required|string',
+            'alamat' => 'required|string',
+            'umur' => 'required|integer',
+            'kontak' => 'required|integer'
+        ]);
+        pelanggan::create($validatedDate);
+        return redirect()->route('pelanggan.index')->with('success','Data Pelanggan berhasil disimpan');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(pelanggan $pelanggan)
+    public function show($id)
     {
         //
+        $pelanggans = pelanggan::find($id); 
+        return view('pelanggan.show',compact('pelanggan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(pelanggan $pelanggan)
+    public function edit($id)
     {
         //
+        $pelanggans = pelanggan::findOrFail($id);
+        return view('pelanggan.edit', compact('pelanggan'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepelangganRequest $request, pelanggan $pelanggan)
+    public function update(UpdatepelangganRequest $request, pelanggan $pelanggans)
     {
         //
+        $validatedDate = $request->validate([
+            'id' => 'required|string',
+            'username' => 'required|string',
+            'password' => 'required|string',
+            'nama' => 'required|string',
+            'alamat' => 'required|string',
+            'umur' => 'required|integer',
+            'kontak' => 'required|integer'
+        ]);
+        $pelanggans->update($validatedDate);
+        return redirect()->route('pelanggan.index')->with('success','Data Pelanggan Berhasil Diperbaharui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pelanggan $pelanggan)
+    public function destroy(pelanggan $pelanggans)
     {
         //
+        $pelanggans->delete();
+        return redirect()->route('pelanggan.index')->with('succes', "Data Pelanggan Berhasil Dihapus");
     }
 }

@@ -70,7 +70,7 @@ class PenyediaLayananController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepenyediaLayananRequest $request, penyediaLayanan $penyediaLayanan)
+    public function update(UpdatepenyediaLayananRequest $request, penyediaLayanan $penyediaLayanans)
     {
         $validatedDate = $request->validate([
             'username' => 'required|string',
@@ -87,13 +87,13 @@ class PenyediaLayananController extends Controller
 
         ]);
         $penyediaLayanans->update($validatedDate);
-        return redirect()->route('penyediaLayanan.index')->with('success','Data penyedia layanan berhasil disimpan');
+        return redirect()->route('penyediaLayanan.index')->with('success','Data penyedia layanan berhasil diperbaharui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(penyediaLayanan $penyediaLayanan)
+    public function destroy(penyediaLayanan $penyediaLayanans)
     {
         $penyediaLayanans->delete();
         return redirect()->route('penyediaLayanan.index')->with('succes', "Data penyedia Layanan Berhasil Dihapus");
