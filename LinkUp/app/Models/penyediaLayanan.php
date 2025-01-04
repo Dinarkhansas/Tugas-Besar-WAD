@@ -21,7 +21,7 @@ class penyediaLayanan extends Model
         'umur',
         'alamat',
         'kontak',
-        'deskripsi','
-        jenis_layanan'
+        'deskripsi',
+        'jenis_layanan'
     ];
 }

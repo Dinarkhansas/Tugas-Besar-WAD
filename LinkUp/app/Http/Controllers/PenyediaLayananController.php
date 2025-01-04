@@ -77,7 +77,7 @@ class PenyediaLayananController extends Controller
             'id' => 'required|string',
             'nama' => 'required|string',
             'jenis_kelamin' => 'required|string',
-            'umur' => 'required|integer',
+            'umur' => 'required|string',
             'alamat' => 'required|string',
             'kontak' => 'required|integer',
             'deskripsi' => 'required|string',
