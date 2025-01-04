@@ -3,7 +3,7 @@
 @section('content')
     {{-- Back Button --}}
     <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
-        <a href="{{ route('pemesanan.index') }}" class="btn btn-outline-custom d-flex gap-2" style="background-color: #3C76B4" >
+        <a href="{{ route('pemesanans.index') }}" class="btn btn-outline-custom d-flex gap-2" style="background-color: #3C76B4" >
             <div class="">
             </div> Daftar Pemesanan
         </a>
@@ -12,7 +12,7 @@
     {{-- Form Create Dosen --}}
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('pemesanan.store') }}" method="post">
+            <form action="{{ route('pemesanans.store') }}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="id" class="form-label">id</label>

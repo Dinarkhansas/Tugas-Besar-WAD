@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pemesanan;
+use App\Models\Pemesanan;
 use App\Http\Requests\StorepemesananRequest;
 use App\Http\Requests\UpdatepemesananRequest;
 use App\Models\penyediaLayanan;
@@ -17,7 +17,7 @@ class PemesananController extends Controller
         //
         $pemesanans = Pemesanan::all();
         
-        return view('pemesanan.index', compact('pemesanan'));
+        return view('pemesanans.index', compact('pemesanans'));
     }
 
     /**
@@ -26,8 +26,8 @@ class PemesananController extends Controller
     public function create()
     {
         //
-        $penyediaLayanan = penyediaLayanan::all();
-        return view('pemesanan.create', compact('penyedia_layanan'));
+        $penyediaLayanans = penyediaLayanan::all();
+        return view('pemesanans.create', compact('penyediaLayanans'));
     }
 
     /**
@@ -44,7 +44,7 @@ class PemesananController extends Controller
 
         ]);
         Pemesanan::create($validatedDate);
-        return redirect()->route('pemesanan.index')->with('success', 'Data Pemesanan Berhasil Disimpan');
+        return redirect()->route('pemesanans.index')->with('success', 'Data Pemesanan Berhasil Disimpan');
     }
 
     /**
@@ -54,7 +54,7 @@ class PemesananController extends Controller
     {
         //
         $pemesanans = Pemesanan::find($id); 
-        return view('pemesanan.show', compact('pemesanan')); 
+        return view('pemesanans.show', compact('pemesanans')); 
     }
 
     /**
@@ -63,9 +63,9 @@ class PemesananController extends Controller
     public function edit($id)
     {
         //
-        $pemesanas = Pemesanan::findOrFail($id);
-        $penyediaLayanan = penyediaLayanan::all();
-        return view('pemesanan.edit', compact('pemesanan', 'penyedia_layanan'));
+        $pemesanans = Pemesanan::findOrFail($id);
+        $penyediaLayanans = penyediaLayanan::all();
+        return view('pemesanans.edit', compact('pemesanans', 'penyediaLayanans'));
     }
 
     /**
@@ -82,7 +82,7 @@ class PemesananController extends Controller
 
         ]);
         $pemesanans->update($validatedDate);
-        return redirect()->route('pemesanan.index')->with('succes', 'Data Pemesanan Berhasil Diperbaharui');
+        return redirect()->route('pemesanans.index')->with('succes', 'Data Pemesanan Berhasil Diperbaharui');
 
 
     }
@@ -95,6 +95,6 @@ class PemesananController extends Controller
         //
         $pemesanans->delete();
 
-        return redirect()->route('pemesanan.index')->with('succes', "Data Pemesanan Berhasil Dihapus");
+        return redirect()->route('pemesanans.index')->with('succes', "Data Pemesanan Berhasil Dihapus");
     }
 }

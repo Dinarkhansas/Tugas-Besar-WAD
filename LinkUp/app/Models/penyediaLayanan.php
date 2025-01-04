@@ -10,7 +10,7 @@ class penyediaLayanan extends Model
     
     use HasFactory;
 
-    protected $table = 'penyediaLayanan';
+    protected $table = 'penyedia_layanans';
 
     protected $fillable = [
         'username',

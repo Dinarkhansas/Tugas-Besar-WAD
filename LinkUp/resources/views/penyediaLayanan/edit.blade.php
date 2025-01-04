@@ -17,7 +17,7 @@
                 <div class="mb-3">
                     <label for="id" class="form-label">ID</label>
                     <input type="text" class="form-control @error('id') is-invalid @enderror" id="id"
-                        name="id" value="{{ old('id', $penyediaLayanans->id) }}">
+                        name="id" value="{{ old('id', $penyediaLayanan->id) }}">
                     @error('id')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -27,7 +27,7 @@
                 <div class="mb-3">
                     <label for="nama" class="form-label">Nama</label>
                     <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
-                        name="nama" value="{{ old('id', $penyediaLayanans->nama) }}">
+                        name="nama" value="{{ old('id', $penyediaLayanan->nama) }}">
                     @error('nama')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -37,7 +37,7 @@
                 <div class="mb-3">
                     <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                     <input type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror" id="jenis_kelamin"
-                        name="jenis_kelamin" value="{{ old('jenis_kelamin', $penyediaLayanans->jenis_kelamin) }}">
+                        name="jenis_kelamin" value="{{ old('jenis_kelamin', $penyediaLayanan->jenis_kelamin) }}">
                     @error('jenis_kelamin')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -47,7 +47,7 @@
                 <div class="mb-3">
                     <label for="umur" class="form-label">Umur</label>
                     <input type="text" class="form-control @error('umur') is-invalid @enderror" id="umur"
-                        name="umur" value="{{ old('umur', $penyediaLayanans->umur) }}">
+                        name="umur" value="{{ old('umur', $penyediaLayanan->umur) }}">
                     @error('umur')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -57,7 +57,7 @@
                 <div class="mb-3">
                     <label for="alamat" class="form-label">Alamat</label>
                     <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat"
-                        name="alamat" value="{{ old('alamat', $penyediaLayanans->alamat) }}">
+                        name="alamat" value="{{ old('alamat', $penyediaLayanan->alamat) }}">
                     @error('alamat')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -67,7 +67,7 @@
                 <div class="mb-3">
                     <label for="kontak" class="form-label">Kontak</label>
                     <input type="text" class="form-control @error('kontak') is-invalid @enderror" id="kontak"
-                        name="kontak" value="{{ old('kontak', $penyediaLayanans->kontak) }}">
+                        name="kontak" value="{{ old('kontak', $penyediaLayanan->kontak) }}">
                     @error('kontak')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -77,7 +77,7 @@
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi</label>
                     <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi"
-                        name="deskripsi" value="{{ old('deskripsi', $penyediaLayanans->deskripsi) }}">
+                        name="deskripsi" value="{{ old('deskripsi', $penyediaLayanan->deskripsi) }}">
                     @error('deskripsi')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -87,7 +87,7 @@
                 <div class="mb-3">
                     <label for="jenis_layanan" class="form-label">Jenis Layanan</label>
                     <input type="text" class="form-control @error('jenis_layanan') is-invalid @enderror" id="jenis_layanan"
-                        name="jenis_layanan" value="{{ old('jenis_layanan', $penyediaLayanans->jenis_layanan) }}">
+                        name="jenis_layanan" value="{{ old('jenis_layanan', $penyediaLayanan->jenis_layanan) }}">
                     @error('jenis_layanan')
                         <div class="invalid-feedback">
                             {{ $message }}

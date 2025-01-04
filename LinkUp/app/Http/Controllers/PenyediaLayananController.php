@@ -15,7 +15,7 @@ class PenyediaLayananController extends Controller
     {
         $penyediaLayanans = penyediaLayanan::all();
         
-        return view('penyediaLayanan.index', compact('penyediaLayanan'));
+        return view('penyediaLayanan.index', compact('penyediaLayanans'));
     }
 
     /**
@@ -31,7 +31,7 @@ class PenyediaLayananController extends Controller
      */
     public function store(StorepenyediaLayananRequest $request)
     {
-        $validatedDate = $request->validate([
+        $validatedData = $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
             'id' => 'required|string',
@@ -42,11 +42,10 @@ class PenyediaLayananController extends Controller
             'kontak' => 'required|integer',
             'deskripsi' => 'required|string',
             'jenis_layanan' => 'required|string',
-            
-
         ]);
-        penyediaLayanan::create($validatedDate);
-        return redirect()->route('penyediaLayanan.index')->with('success','Data penyedia layanan berhasil disimpan');
+    
+        penyediaLayanan::create($validatedData);
+        return redirect()->route('penyediaLayanan.index')->with('success', 'Data penyedia layanan berhasil disimpan');
     }
 
     /**
@@ -64,7 +63,7 @@ class PenyediaLayananController extends Controller
     public function edit($id)
     {
         $penyediaLayanans = penyediaLayanan::findOrFail($id);
-        return view('penyediaLayanan.edit', compact('penyediaLayanan'));
+        return view('penyediaLayanans.edit', compact('penyediaLayanan'));
     }
 
     /**
@@ -72,7 +71,7 @@ class PenyediaLayananController extends Controller
      */
     public function update(UpdatepenyediaLayananRequest $request, penyediaLayanan $penyediaLayanans)
     {
-        $validatedDate = $request->validate([
+        $validatedData = $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
             'id' => 'required|string',
@@ -83,11 +82,9 @@ class PenyediaLayananController extends Controller
             'kontak' => 'required|integer',
             'deskripsi' => 'required|string',
             'jenis_layanan' => 'required|string',
-            
-
         ]);
-        $penyediaLayanans->update($validatedDate);
-        return redirect()->route('penyediaLayanan.index')->with('success','Data penyedia layanan berhasil diperbaharui');
+        $penyediaLayanans->update($validatedData);
+        return redirect()->route('penyediaLayanan.index')->with('success', 'Data penyedia layanan berhasil diperbaharui');
     }
 
     /**

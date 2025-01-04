@@ -3,7 +3,7 @@
 
     {{-- Back Button --}}
     <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
-        <a href="{{ route('dosen.index') }}"class="btn btn-primary" style="background-color: #3C76B4">
+        <a href="{{ route('penyediaLayanan.index') }}"class="btn btn-primary" style="background-color: #3C76B4">
             <div class="">
             </div> Daftar Penyedia Layanan
         </a>

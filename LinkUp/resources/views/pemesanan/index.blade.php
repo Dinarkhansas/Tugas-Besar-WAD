@@ -27,16 +27,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pemesanans as $row)
+                    @foreach ($pemesanan as $row)
                         <tr>
-                            <th scope="pemesanans">{{ $loop->iteration }}</th>
+                            <th scope="pemesanan">{{ $loop->iteration }}</th>
                             <td>{{ $row->nim}}</td>
                             <td>{{ $row->jenis_layanan}}</td>
                             <td>{{ $row->harga}}</td>
                             <td>{{ $row->id}}</td>
                             <td>
-                                <a href="{{ route('pemesanans.show', $pemesanans->id) }}" class="btn btn-info">Detail</a>
-                                <form action="{{ route('mahasiswa.destroy', $pemesanans->id) }}" method="post" class="d-inline">
+                                <a href="{{ route('pemesanans.show', $pemesanan->id) }}" class="btn btn-info">Detail</a>
+                                <form action="{{ route('mahasiswa.destroy', $pemesanan->id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger">Hapus</button>

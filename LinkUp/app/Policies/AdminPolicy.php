@@ -13,7 +13,7 @@ class AdminPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class AdminPolicy
      */
     public function view(User $user, admin $admin): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class AdminPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class AdminPolicy
      */
     public function update(User $user, admin $admin): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class AdminPolicy
      */
     public function delete(User $user, admin $admin): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class AdminPolicy
      */
     public function restore(User $user, admin $admin): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class AdminPolicy
      */
     public function forceDelete(User $user, admin $admin): bool
     {
-        return false;
+        return true;
     }
 }
