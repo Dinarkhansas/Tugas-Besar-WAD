@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->text('review');
             $table->integer('rating');
             $table->timestamps();
-            $table->foreign('pesanan_id')->references('id')->on('pesanan');
+            $table->foreign('pesanan_id')->references('id')->on('pesanan')->onDelete('cascade');
         });
     }
 

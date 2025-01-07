@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('bukti_transfer')->nullable();
             $table->string('status')->default('pending');
             $table->bigInteger('pesanan_id')->unsigned();
-            $table->foreign('pesanan_id')->references('id')->on('pesanan');
+            $table->foreign('pesanan_id')->references('id')->on('pesanan')->onDelete('cascade');
+            
 
         });
     }
