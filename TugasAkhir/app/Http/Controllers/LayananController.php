@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Layanan;
+use App\Models\Feedback;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLayananRequest;
 use App\Http\Requests\UpdateLayananRequest;
 
@@ -13,10 +17,27 @@ class LayananController extends Controller
      */
     public function index()
     {
-        //
-        $layanan= Layanan::all();
-        
-        return view('layanan.index', compact('layanan'));
+        $userId = auth()->id();
+
+        // Ambil 4 layanan yang dibuat oleh pengguna
+        $userLayanan = Layanan::where('user_id', $userId)->take(4)->get();
+
+        // Ambil 8 layanan lainnya yang bukan milik pengguna
+        $otherLayanan = Layanan::where('user_id', '!=', $userId)->take(8)->get();
+
+        return view('layanan.index', compact('userLayanan', 'otherLayanan'));
+    }
+
+    /**
+     * Display a listing of the user's services.
+     */
+    public function userIndex()
+    {
+        $userId = auth()->id();
+
+        $layanan = Layanan::where('user_id', $userId)->get();
+
+        return view('layanan.userIndex', compact('layanan'));
     }
 
     /**
@@ -24,8 +45,15 @@ class LayananController extends Controller
      */
     public function create()
     {
-        //
-        return view('layanan.create');
+        $kode_layanan = $this->generateRandomCode(12);
+
+        return view('layanan.create', compact('kode_layanan'));
+    }
+
+    // Fungsi untuk menghasilkan kode acak
+    private function generateRandomCode($length)
+    {
+        return substr(str_shuffle(str_repeat('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / 36))), 1, $length);
     }
 
     /**
@@ -33,28 +61,12 @@ class LayananController extends Controller
      */
     public function store(StoreLayananRequest $request)
     {
-        //
-        $validatedDate = $request->validate([
-            'kode_layanan' => 'required|string',
-            'nama_pelayan' => 'required|string',
-            'kontak' => 'required|string',
-            'nama_layanan' => 'required|string',
-            'deskripsi' => 'required|string',
-            
+        // Menambahkan user_id ke data yang disimpan
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = auth()->id(); // Menyimpan ID pengguna yang sedang login
 
-        ]);
-        Layanan::create($validatedDate);
+        Layanan::create($validatedData);
         return redirect()->route('layanan.index')->with('success', 'Data Layanan yang Tersedia Berhasil Disimpan');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        //
-        $layanan = Layanan::find($id);  // Mengambil data dosen dari database
-        return view('layanan.show', compact('layanan'));  // Mengirimkan data dosen ke view
     }
 
     /**
@@ -62,7 +74,6 @@ class LayananController extends Controller
      */
     public function edit($id)
     {
-        //
         $layanan = Layanan::findOrFail($id);
         return view('layanan.edit', compact('layanan'));
     }
@@ -72,17 +83,8 @@ class LayananController extends Controller
      */
     public function update(UpdateLayananRequest $request, Layanan $layanan)
     {
-        //
-        $validatedDate = $request->validate([
-            'kode_layanan' => 'required|string',
-            'nama_pelayan' => 'required|string',
-            'kontak' => 'required|string',
-            'nama_layanan' => 'required|string',
-            'deskripsi' => 'required|string',
-
-        ]);
-        $layanan->update($validatedDate);
-        return redirect()->route('layanan.index')->with('succes', 'Tabel Layanan yang Tersedia Berhasil Diperbaharui');
+        $layanan->update($request->validated());
+        return redirect()->route('layanan.index')->with('success', 'Tabel Layanan yang Tersedia Berhasil Diperbaharui');
     }
 
     /**
@@ -90,9 +92,14 @@ class LayananController extends Controller
      */
     public function destroy(Layanan $layanan)
     {
-        //
         $layanan->delete();
-
-        return redirect()->route('dosen.index')->with('succes', "Data Layanan yang Tersedia Berhasil Dihapus");
+        return redirect()->route('layanan.index')->with('success', 'Data Layanan yang Tersedia Berhasil Dihapus');
     }
+
+    public function showPesanan($layanan_id)
+    {
+        $layanan = Layanan::with('pesanan.pembayaran')->findOrFail($layanan_id); // Mengambil layanan beserta pesanan dan pembayaran
+        return view('layanan.pesanan', compact('layanan'));
+    }
+
 }

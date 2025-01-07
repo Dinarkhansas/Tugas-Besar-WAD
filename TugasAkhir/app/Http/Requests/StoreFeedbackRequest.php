@@ -11,7 +11,7 @@ class StoreFeedbackRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreFeedbackRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'review' => 'required|string|max:255',
+            'rating' => 'required|integer|min:1|max:5',
         ];
     }
 }

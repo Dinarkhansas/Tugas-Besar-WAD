@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('layanan', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('kode_layanan');
-            $table->string('nama_pelayan');
+            $table->string('kode_layanan');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('kontak');
             $table->string('nama_layanan');
-            $table->string('deksripsi');
+            $table->string('deskripsi');
+            $table->decimal('harga_per_jam', 10, 2);
 
         });
     }

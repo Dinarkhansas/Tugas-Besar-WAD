@@ -2,65 +2,79 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pesanan;
 use App\Models\Pembayaran;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePembayaranRequest;
 use App\Http\Requests\UpdatePembayaranRequest;
 
 class PembayaranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $pembayarans = Pembayaran::whereHas('pesanan', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->with('pesanan')->get();
+
+        return view('pembayaran.index', compact('pembayarans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create($pesanan_id)
     {
-        //
+        $pesanan = Pesanan::findOrFail($pesanan_id);
+
+        $kodePembayaran = $this->generateRandomString(12);
+
+        return view('pembayaran.create', compact('pesanan', 'kodePembayaran'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    private function generateRandomString($length = 12)
+    {
+        return substr(str_shuffle(str_repeat('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / 36))), 1, $length);
+    }
+
     public function store(StorePembayaranRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['bukti_transfer'] = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
+        Pembayaran::create($data);
+        return redirect()->route('pesanan.index')->with('success', 'Pembayaran berhasil dibuat.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pembayaran $pembayaran)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Pembayaran $pembayaran)
     {
-        //
+        return view('pembayaran.edit', compact('pembayaran'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatePembayaranRequest $request, Pembayaran $pembayaran)
     {
-        //
+        $data = $request->validated();
+        if ($request->hasFile('bukti_transfer')) {
+            $data['bukti_transfer'] = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
+        }
+        $data['status'] = 'pending';
+        $pembayaran->update($data);
+        return redirect()->route('pesanan.index')->with('success', 'Pembayaran berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Pembayaran $pembayaran)
     {
-        //
+        $pembayaran->delete();
+        return redirect()->route('pesanan.index')->with('success', 'Pembayaran berhasil dihapus.');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:success,failed', // Pastikan status hanya bisa success atau failed
+        ]);
+
+        $pembayaran = Pembayaran::findOrFail($id);
+        $pembayaran->status = $request->input('status');
+        $pembayaran->save();
+
+        return redirect()->back()->with('success', 'Status pembayaran berhasil diperbarui.');
     }
 }

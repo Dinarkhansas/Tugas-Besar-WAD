@@ -4,21 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('feedback', function (Blueprint $table) {
+        Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('pesanan_id')->unsigned();
+            $table->text('review');
+            $table->integer('rating');
             $table->timestamps();
-            $table->string('nama_layanan');
-            $table->string('jenis_pembayaran');
-            $table->string('deskripsi');
-            $table->bigInteger('pembayaran_id')->unsigned();
-            $table->foreign('pembayaran_id')->references('id')->on('pembayaran');
+            $table->foreign('pesanan_id')->references('id')->on('pesanan');
         });
     }
 

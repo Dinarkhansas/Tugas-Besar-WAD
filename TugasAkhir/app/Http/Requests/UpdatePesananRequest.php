@@ -6,23 +6,24 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePesananRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
+    public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'additional_sewa_jam' => 'required|integer|min:1', 
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'additional_sewa_jam.required' => 'Tambahkan durasi sewa harus diisi.',
+            'additional_sewa_jam.integer' => 'Tambahkan durasi sewa harus berupa angka.',
+            'additional_sewa_jam.min' => 'Tambahkan durasi sewa minimal 1 jam.',
         ];
     }
 }

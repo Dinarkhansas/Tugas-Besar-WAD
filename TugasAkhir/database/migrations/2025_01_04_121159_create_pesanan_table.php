@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('pesanan', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('kode_pesanan');
-            $table->string('harga');
-            $table->string('nama_layanan');
+            $table->string('kode_pesanan')->unique();
+            $table->integer('sewa_jam');
             $table->bigInteger('layanan_id')->unsigned();
-            $table->foreign('layanan_id')->references('id')->on('layanan');
+            $table->bigInteger('user_id')->unsigned();
 
+            $table->foreign('layanan_id')->references('id')->on('layanan')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -14,20 +14,24 @@ class PesananController extends Controller
      */
     public function index()
     {
-        //
-        $mahasiswa = Pesanan::all();
-        
-        return view('pesanan.index', compact('pesanan'));
+        $user = auth()->user();
+
+        $pesanans = Pesanan::with('layanan')
+            ->where('user_id', $user->id)
+            ->get();
+
+        return view('pesanan.index', compact('pesanans'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($layanan_id)
     {
-        //
-        $layanan = Layanan::all();
-        return view('pesanan.create', compact('layanan'));
+        $layanan = Layanan::findOrFail($layanan_id);
+        $kodePesanan = $this->generateRandomString(12);
+
+        return view('pesanan.create', compact('layanan', 'kodePesanan'));
     }
 
     /**
@@ -35,27 +39,25 @@ class PesananController extends Controller
      */
     public function store(StorePesananRequest $request)
     {
-        //
-        $validatedDate = $request->validate([
-            'kode_pesanan' => 'required|string',
-            'harga' => 'required|string',
-            'nama_layanan' => 'required|string',
-            'layanan_id' => 'required|string',
+        $kodePesanan = $this->generateRandomString(12);
 
-
+        // Membuat pesanan baru
+        Pesanan::create([
+            'kode_pesanan' => $kodePesanan,
+            'sewa_jam' => $request->sewa_jam,
+            'layanan_id' => $request->layanan_id,
+            'user_id' => auth()->id(), // Mengambil ID pengguna yang sedang login
         ]);
-        Pesanan::create($validatedDate);
+
         return redirect()->route('pesanan.index')->with('success', 'Data Pesanan Berhasil Disimpan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Pesanan $pesanan)
     {
-        //
-        $mahasiswa = Mahasiswa::find($id); 
-        return view('mahasiswa.show', compact('mahasiswa')); 
+        return view('pesanan.show', compact('pesanan'));
     }
 
     /**
@@ -63,7 +65,8 @@ class PesananController extends Controller
      */
     public function edit(Pesanan $pesanan)
     {
-        //
+        $layanan = Layanan::all(); // Mengambil semua layanan untuk dropdown
+        return view('pesanan.edit', compact('pesanan', 'layanan'));
     }
 
     /**
@@ -71,7 +74,20 @@ class PesananController extends Controller
      */
     public function update(UpdatePesananRequest $request, Pesanan $pesanan)
     {
-        //
+        // Validasi tambahan sewa jam
+        $request->validate([
+            'additional_sewa_jam' => 'required|integer|min:1', // Validasi untuk tambahan jam sewa
+        ]);
+
+        // Menghitung total sewa jam
+        $totalSewaJam = $pesanan->sewa_jam + $request->additional_sewa_jam;
+
+        // Memperbarui pesanan dengan total sewa jam
+        $pesanan->update([
+            'sewa_jam' => $totalSewaJam,
+        ]);
+
+        return redirect()->route('pesanan.index')->with('success', 'Data Pesanan Berhasil Diperbarui');
     }
 
     /**
@@ -79,6 +95,12 @@ class PesananController extends Controller
      */
     public function destroy(Pesanan $pesanan)
     {
-        //
+        $pesanan->delete(); // Menghapus pesanan
+        return redirect()->route('pesanan.index')->with('success', 'Data Pesanan Berhasil Dihapus');
+    }
+
+    private function generateRandomString($length = 12)
+    {
+        return substr(str_shuffle(str_repeat($x = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', ceil($length / strlen($x)))), 1, $length);
     }
 }

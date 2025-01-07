@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('kode_pembayaran');
-            $table->string('nama_layanan');
-            $table->string('jenis_pembayaran');
+            $table->string('kode_pembayaran');
+            $table->string('bukti_transfer')->nullable();
+            $table->string('status')->default('pending');
             $table->bigInteger('pesanan_id')->unsigned();
             $table->foreign('pesanan_id')->references('id')->on('pesanan');
 
